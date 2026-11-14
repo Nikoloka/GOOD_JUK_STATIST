@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Процент отметки киберспортсмена — GOOD_JUK | AMX CDC Rafale Mortelle</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='13' width='24' height='6' rx='3' fill='%23e8b33c'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg-deep: #07090f;
+      --bg-surface: #0f1320;
+      --bg-card: rgba(18, 24, 38, 0.82);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(168, 85, 247, 0.38);
+      --border-gold: rgba(245, 184, 65, 0.42);
+      --text-primary: #f3f6fc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --violet: #a855f7;
+      --cyan: #22d3ee;
+      --gold: #f5b841;
+      --gold-bright: #ffd166;
+      --green: #92cc05;
+      --emerald: #10b981;
+      --rose: #fb7185;
+      --amber: #fbbf24;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Inter, Arial, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(168, 85, 247, 0.22), transparent),
+        radial-gradient(ellipse 60% 45% at 88% 18%, rgba(34, 211, 238, 0.14), transparent),
+        radial-gradient(ellipse 50% 40% at 10% 65%, rgba(245, 184, 65, 0.09), transparent);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at 50% 25%, black 30%, transparent 85%);
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 22px 20px 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top Status Bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 11px 18px;
+      background: rgba(15, 19, 32, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      backdrop-filter: blur(16px);
+      margin-bottom: 24px;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.38);
+      color: #34d399;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.5; }
+    }
+
+    .clan-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px 4px 6px;
+      border-radius: 999px;
+      background: rgba(146, 204, 5, 0.1);
+      border: 1px solid rgba(146, 204, 5, 0.32);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .clan-pill:hover {
+      background: rgba(146, 204, 5, 0.2);
+    }
+
+    .clan-pill img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+    }
+
+    .clan-tag { color: var(--green); font-weight: 800; }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 15px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.11);
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-1px);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, rgba(245, 184, 65, 0.2), rgba(234, 88, 12, 0.2));
+      border-color: var(--border-gold);
+      color: var(--gold-bright);
+    }
+
+    /* Main Title */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: rgba(34, 211, 238, 0.09);
+      border: 1px solid rgba(34, 211, 238, 0.25);
+    }
+
+    .main-title {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1.08;
+      background: linear-gradient(95deg, #ffffff 0%, #e9d5ff 42%, #f5b841 78%, #22d3ee 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 6px 28px rgba(168, 85, 247, 0.28));
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 14.5px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .subtitle strong { color: var(--text-primary); }
+
+    /* Countdown Banner */
+    .countdown-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(22, 16, 42, 0.9), rgba(13, 22, 38, 0.92));
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 20px 26px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card), inset 0 0 40px rgba(168, 85, 247, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .countdown-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      max-width: 480px;
+    }
+
+    .countdown-tag {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+    }
+
+    .countdown-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .countdown-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .countdown-grid {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      min-width: 84px;
+      padding: 11px 13px;
+      border-radius: var(--radius-md);
+      background: rgba(7, 9, 15, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      text-align: center;
+    }
+
+    .time-val {
+      font-size: 30px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.05;
+      color: #fff;
+    }
+
+    .time-box.sec .time-val {
+      background: linear-gradient(180deg, #22d3ee, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .time-lbl {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .time-sep {
+      font-size: 24px;
+      font-weight: 800;
+      color: rgba(168, 85, 247, 0.65);
+      margin-top: -12px;
+    }
+
+    /* Main Grid: Tank + Live MoE */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tank-stage {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        radial-gradient(circle at 55% 48%, rgba(168, 85, 247, 0.24), transparent 62%),
+        radial-gradient(circle at 25% 75%, rgba(34, 211, 238, 0.14), transparent 55%),
+        var(--bg-card);
+      border-color: rgba(168, 85, 247, 0.26);
+    }
+
+    .tank-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tank-nation-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: rgba(245, 184, 65, 0.13);
+      border: 1px solid rgba(245, 184, 65, 0.38);
+      color: var(--gold-bright);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .fr-flag {
+      display: inline-flex;
+      width: 18px;
+      height: 12px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .fr-flag span { flex: 1; }
+    .fr-b { background: #0055a4; }
+    .fr-w { background: #ffffff; }
+    .fr-r { background: #ef4135; }
+
+    .tank-title {
+      font-size: 27px;
+      font-weight: 900;
+      margin-top: 8px;
+      color: #fff;
+    }
+
+    .tank-role {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .mastery-floating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(245, 184, 65, 0.1);
+      border: 1px solid rgba(245, 184, 65, 0.32);
+      padding: 6px 14px 6px 8px;
+      border-radius: 12px;
+    }
+
+    .mastery-floating img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(245, 184, 65, 0.5));
+    }
+
+    .mastery-floating-text {
+      font-size: 12px;
+      line-height: 1.25;
+    }
+    .mastery-floating-text strong {
+      display: block;
+      color: var(--gold-bright);
+      font-size: 13px;
+    }
+
+    .tank-visual-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 275px;
+      margin: 6px 0;
+    }
+
+    .tank-pedestal {
+      position: absolute;
+      bottom: 18px;
+      width: 78%;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.42) 0%, rgba(34, 211, 238, 0.18) 45%, transparent 75%);
+      filter: blur(8px);
+      z-index: 0;
+    }
+
+    .tank-hero-img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.78)) drop-shadow(0 0 28px rgba(168, 85, 247, 0.22));
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tank-stage:hover .tank-hero-img {
+      transform: scale(1.03) translateY(-3px);
+    }
+
+    /* Gun Marks Strip */
+    .gun-marks-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .gun-mark-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(7, 9, 15, 0.65);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .gun-mark-item.unlocked {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.13), rgba(7, 9, 15, 0.78));
+    }
+
+    .gun-mark-item.dropped {
+      border-color: rgba(251, 191, 36, 0.48);
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.13), rgba(7, 9, 15, 0.78));
+    }
+
+    .gun-mark-item.target {
+      border-color: rgba(168, 85, 247, 0.4);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.11), rgba(7, 9, 15, 0.78));
+    }
+
+    .gun-mark-item img {
+      width: 46px;
+      height: 41px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      flex-shrink: 0;
+    }
+
+    .gun-mark-meta {
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .gun-mark-meta strong {
+      display: block;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .gun-mark-status {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Right Panel: MoE Gauge & Deltas */
+    .moe-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .moe-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .moe-player-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .player-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #a855f7, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 17px;
+      color: #07090f;
+    }
+
+    .player-name {
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .player-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .moe-gauge-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: rgba(7, 9, 15, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .gauge-svg-box {
+      position: relative;
+      width: 154px;
+      height: 154px;
+      flex-shrink: 0;
+    }
+
+    .gauge-svg {
+      width: 154px;
+      height: 154px;
+      transform: rotate(-90deg);
+    }
+
+    .gauge-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 12;
+    }
+
+    .gauge-fill {
+      fill: none;
+      stroke: url(#moeGrad);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-dasharray: 395.84;
+      stroke-dashoffset: 395.84;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.55));
+    }
+
+    .gauge-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .gauge-pct {
+      font-size: 29px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .gauge-lbl {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--amber);
+      margin-top: 5px;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(251, 191, 36, 0.12);
+    }
+
+    .moe-targets-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .target-progress-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .target-progress-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .bar-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22d3ee, #a855f7, #f5b841);
+      transition: width 0.6s ease;
+    }
+
+    .deltas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .delta-box {
+      padding: 14px 15px;
+      border-radius: var(--radius-md);
+      background: rgba(7, 9, 15, 0.72);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .delta-box.highlight-day {
+      border-color: rgba(34, 211, 238, 0.35);
+      background: linear-gradient(160deg, rgba(34, 211, 238, 0.1), rgba(7, 9, 15, 0.8));
+    }
+
+    .delta-box.highlight-period {
+      border-color: rgba(168, 85, 247, 0.35);
+      background: linear-gradient(160deg, rgba(168, 85, 247, 0.12), rgba(7, 9, 15, 0.8));
+    }
+
+    .delta-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-secondary);
+    }
+
+    .delta-val {
+      font-size: 25px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.15;
+    }
+
+    .pos { color: #34d399; }
+    .neg { color: #fb7185; }
+
+    .delta-sub {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* Planki Strip */
+    .planki-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .planka-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 15px 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .planka-card.reached-badge {
+      border-color: rgba(251, 191, 36, 0.42);
+      box-shadow: inset 0 0 24px rgba(251, 191, 36, 0.07);
+    }
+
+    .planka-pct {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-secondary);
+    }
+
+    .planka-dmg {
+      font-size: 23px;
+      font-weight: 900;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .planka-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Chart Card */
+    .chart-card {
+      margin-bottom: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-tabs {
+      display: inline-flex;
+      background: rgba(7, 9, 15, 0.78);
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      gap: 4px;
+    }
+
+    .tab-btn {
+      padding: 7px 14px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #9333ea, #4f46e5);
+      color: #fff;
+    }
+
+    .chart-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .mini-stat {
+      background: rgba(7, 9, 15, 0.58);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+    }
+
+    .mini-stat-lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .mini-stat-val {
+      font-size: 20px;
+      font-weight: 900;
+      margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      background: rgba(7, 9, 15, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    #moeChartSvg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .chart-tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: rgba(11, 15, 26, 0.96);
+      border: 1px solid rgba(168, 85, 247, 0.55);
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75);
+      font-size: 12px;
+      min-width: 225px;
+      opacity: 0;
+      transform: translate(-50%, -108%);
+      transition: opacity 0.15s ease;
+      z-index: 20;
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .legend-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .legend-line {
+      width: 18px;
+      height: 3px;
+      border-radius: 2px;
+    }
+
+    /* Bottom Two-Column: Auto-Parsed Journal + Tank Live Stats */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .sessions-table-wrap {
+      max-height: 330px;
+      overflow-y: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+    }
+
+    table.sessions-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .sessions-table th {
+      position: sticky;
+      top: 0;
+      background: #0d121f;
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sessions-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sessions-table tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .stats-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .kpi-tile {
+      background: rgba(7, 9, 15, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 13px;
+    }
+
+    .kpi-tile-val {
+      font-size: 21px;
+      font-weight: 900;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-tile-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 3px;
+      font-weight: 700;
+    }
+
+    .medals-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .medal-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px 6px 6px;
+      border-radius: 10px;
+      background: rgba(7, 9, 15, 0.7);
+      border: 1px solid rgba(245, 184, 65, 0.22);
+      font-size: 12px;
+    }
+
+    .medal-chip img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .medal-count {
+      color: var(--gold-bright);
+      font-weight: 900;
+    }
+
+    /* Subtle Calibration Popover */
+    .calib-box {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .calib-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .calib-row input {
+      background: rgba(7, 9, 15, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: #fff;
+      width: 110px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer a {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.95);
+      color: #04130d;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.25s ease;
+      z-index: 999;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .showcase-grid,
+      .two-col-grid {
+        grid-template-columns: 1fr;
+      }
+      .planki-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .gun-marks-strip,
+      .chart-summary-strip,
+      .stats-kpi-grid,
+      .planki-grid,
+      .deltas-grid {
+        grid-template-columns: 1fr;
+      }
+      .moe-gauge-wrap {
+        flex-direction: column;
+        text-align: center;
+      }
+      .time-sep { display: none; }
+      .time-box { min-width: 70px; flex: 1; }
+    }
+  
+    /* v4 addons */
+    .chart-empty{display:flex;align-items:center;justify-content:center;min-height:230px;border:1px dashed var(--border-subtle);border-radius:14px;color:var(--text-muted);font-size:13px;line-height:1.65;padding:24px;text-align:center;margin:6px;}
+    .sess-empty{text-align:center;color:var(--text-muted) !important;padding:26px 12px !important;font-size:13px !important;line-height:1.6;}
+    .chart-tooltip{display:none;position:absolute;z-index:5;background:rgba(10,13,22,.95);border:1px solid var(--border-subtle);border-radius:10px;padding:8px 11px;font-size:12px;color:var(--text-primary);pointer-events:none;box-shadow:0 10px 26px rgba(0,0,0,.5);}
+    .chart-container{position:relative;}
+    /* v4.2 — планки: компактные карточки с аккуратными иконками, без тяжёлых теней */
+    .planki-compact .planka-card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:0;padding:13px 16px;box-shadow:none;}
+    .planki-compact .planka-card img{height:54px;width:auto;flex:none;filter:drop-shadow(0 5px 12px rgba(0,0,0,.4));}
+    .planki-compact .planka-pct{line-height:1.35;margin-bottom:2px;}
+    .planki-compact .planka-dmg{margin:1px 0 2px;}
+    .card,.countdown-card{box-shadow:0 14px 34px rgba(0,0,0,.42);}
+    .forecast-pill{display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border-radius:999px;border:1px solid rgba(245,184,65,.4);background:rgba(245,184,65,.09);color:var(--gold-bright);font-size:11.5px;font-weight:700;letter-spacing:.03em;cursor:default;}
+    .forecast-pill.ok{border-color:rgba(16,185,129,.45);background:rgba(16,185,129,.1);color:#34d399;}
+    .forecast-pill.na{border-color:var(--border-subtle);background:rgba(255,255,255,.03);color:var(--text-muted);font-weight:600;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="topbar">
+      <div class="topbar-left">
+        <span class="live-badge">
+          <span class="live-dot"></span>
+          <span id="syncStatusText">LIVE</span>
+        </span>
+        <a class="clan-pill" href="https://lesta.ru/clans/wot/219761/" target="_blank" rel="noopener">
+          <img src="assets/clan_emblem.png" alt="MILE_" onerror="this.style.display='none'" />
+          <span class="clan-tag">[MILE_]</span>
+          <span>GREEN MILE</span>
+        </a>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn" id="refreshApiBtn" type="button">Проверить новые бои</button>
+        <a class="btn btn-gold" href="https://tanki.su/ru/community/accounts/32268630-GOOD_JUK/" target="_blank" rel="noopener">
+          Профиль GOOD_JUK ↗
+        </a>
+      </div>
+    </nav>
+
+    <header class="hero-header">
+      <div class="eyebrow">МИР ТАНКОВ · ОТМЕТКА НА СТВОЛЕ</div>
+      <h1 class="main-title">Процент отметки киберспортсмена</h1>
+      <p class="subtitle">
+        Отслеживание процента отметки игрока <strong>GOOD_JUK [MILE_]</strong> на танке <strong>AMX CDC Rafale Mortelle</strong>
+      </p>
+    </header>
+
+    <section class="countdown-card" aria-label="Обратный отсчёт до 13 января 2027 года">
+      <div class="countdown-info">
+        <span class="countdown-tag">ДЕДЛАЙН ЧЕЛЛЕНДЖА</span>
+        <div class="countdown-title">Обратный отсчёт до 13 января 2027 года</div>
+      </div>
+      <div class="countdown-grid">
+        <div class="time-box"><div class="time-val" id="cdDays">—</div><div class="time-lbl">Дней</div></div>
+        <span class="time-sep">:</span>
+        <div class="time-box"><div class="time-val" id="cdHours">—</div><div class="time-lbl">Часов</div></div>
+        <span class="time-sep">:</span>
+        <div class="time-box"><div class="time-val" id="cdMinutes">—</div><div class="time-lbl">Минут</div></div>
+        <span class="time-sep">:</span>
+        <div class="time-box sec"><div class="time-val" id="cdSeconds">—</div><div class="time-lbl">Секунд</div></div>
+      </div>
+    </section>
+
+    <section class="showcase-grid">
+      <div class="card tank-stage">
+        <div class="tank-header">
+          <div>
+            <div class="tank-nation-badge">
+              <span class="fr-flag"><span class="fr-b"></span><span class="fr-w"></span><span class="fr-r"></span></span>
+              <span>Франция · СТ-VIII Премиум</span>
+            </div>
+            <h2 class="tank-title">AMX CDC Rafale Mortelle</h2>
+            <div class="tank-role">СТ поддержки · Кассета с системой дозарядки на 3 снаряда</div>
+          </div>
+          <div class="mastery-floating">
+            <img src="assets/mastery4_big.png" alt="Знак Мастер" onerror="this.parentElement.style.display='none'" />
+            <div class="mastery-floating-text">
+              <strong>Знак «Мастер»</strong>
+              <span>Получен на танке</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tank-visual-wrap">
+          <div class="tank-pedestal"></div>
+          <img class="tank-hero-img" src="assets/tank_shop_600.webp" alt="AMX CDC Rafale Mortelle"
+               onerror="if(!this.dataset.f){this.dataset.f=1;this.src='assets/tank_shop_600.png';}" />
+        </div>
+
+        <div class="gun-marks-strip">
+          <div class="gun-mark-item" id="markCard1">
+            <img src="assets/mark1.png" alt="1 отметка" />
+            <div class="gun-mark-meta">
+              <strong>1 отметка (65%)</strong>
+              <span class="gun-mark-status" id="markStatus1" style="color:var(--text-muted);">—</span>
+            </div>
+          </div>
+          <div class="gun-mark-item" id="markCard2">
+            <img src="assets/mark2.png" alt="2 отметки" />
+            <div class="gun-mark-meta">
+              <strong>2 отметки (85%)</strong>
+              <span class="gun-mark-status" id="markStatus2" style="color:var(--text-muted);">—</span>
+            </div>
+          </div>
+          <div class="gun-mark-item" id="markCard3">
+            <img src="assets/mark3.png" alt="3 отметки" />
+            <div class="gun-mark-meta">
+              <strong>3 отметки (95%)</strong>
+              <span class="gun-mark-status" id="markStatus3" style="color:var(--text-muted);">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card moe-panel">
+        <div class="moe-top-row">
+          <div class="moe-player-box">
+            <div class="player-avatar">GJ</div>
+            <div>
+              <div class="player-name">GOOD_JUK <span style="color: var(--green); font-size: 15px;">[MILE_]</span></div>
+              <div class="player-sub">ID: 32268630 · Боёв на танке: <strong id="heroTankBattles" style="color:#fff;">—</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="moe-gauge-wrap">
+          <div class="gauge-svg-box">
+            <svg class="gauge-svg" viewBox="0 0 154 154">
+              <defs>
+                <linearGradient id="moeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d99a1f" />
+                  <stop offset="100%" stop-color="#ffd166" />
+                </linearGradient>
+              </defs>
+              <circle class="gauge-bg" cx="77" cy="77" r="63" />
+              <circle class="gauge-fill" id="moeGaugeCircle" cx="77" cy="77" r="63" />
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-pct" id="currentMoeDisplay">—</div>
+            </div>
+          </div>
+
+          <div class="moe-targets-info">
+            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 2px;">
+              Скользящая сумма (EMA): <strong id="currentEmaVal" style="color: var(--gold-bright);">—</strong>
+            </div>
+
+            <div class="target-progress-row">
+              <div class="target-progress-head">
+                <span style="color: var(--amber);">Планка 65% · 1 отметка</span>
+                <span id="prog1Text">—</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" id="prog1Bar" style="width: 0%;"></div></div>
+            </div>
+
+            <div class="target-progress-row">
+              <div class="target-progress-head">
+                <span style="color: #c084fc;">Планка 85% · 2 отметки</span>
+                <span id="prog2Text">—</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" id="prog2Bar" style="width: 0%; background: linear-gradient(90deg,#a855f7,#c084fc);"></div></div>
+            </div>
+
+            <div class="target-progress-row">
+              <div class="target-progress-head">
+                <span style="color: var(--gold-bright);">Планка 95% · 3 отметки</span>
+                <span id="prog3Text">—</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" id="prog3Bar" style="width: 0%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="deltas-grid">
+          <div class="delta-box highlight-day">
+            <span class="delta-label">Результат за день</span>
+            <div class="delta-val" id="dayDeltaVal">—</div>
+            <div class="delta-sub" id="dayDeltaSub">Сегодня боёв не было</div>
+          </div>
+          <div class="delta-box highlight-period">
+            <span class="delta-label" id="periodDeltaLabel">Результат за период</span>
+            <div class="delta-val" id="periodDeltaVal">—</div>
+            <div class="delta-sub" id="periodDeltaSub">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="planki-grid planki-compact" aria-label="Актуальные планки отметок AMX CDC Rafale Mortelle">
+      <div class="planka-card">
+        <div>
+          <div class="planka-pct" style="color:var(--amber);">Отметка 65%</div>
+          <div class="planka-dmg" id="planka65">—</div>
+          <div class="planka-note">1 отметка на стволе</div>
+        </div>
+        <img src="assets/mark1.png" alt="1 отметка" />
+      </div>
+      <div class="planka-card">
+        <div>
+          <div class="planka-pct" style="color:#c084fc;">Отметка 85%</div>
+          <div class="planka-dmg" id="planka85">—</div>
+          <div class="planka-note">2 отметки · цель челленджа</div>
+        </div>
+        <img src="assets/mark2.png" alt="2 отметки" />
+      </div>
+      <div class="planka-card">
+        <div>
+          <div class="planka-pct" style="color:var(--gold-bright);">Отметка 95%</div>
+          <div class="planka-dmg" id="planka95">—</div>
+          <div class="planka-note">3 отметки · цель челленджа</div>
+        </div>
+        <img src="assets/mark3.png" alt="3 отметки" />
+      </div>
+      <div class="planka-card">
+        <div>
+          <div class="planka-pct" style="color:var(--cyan);">Планка 100%</div>
+          <div class="planka-dmg" id="planka100">—</div>
+          <div class="planka-note" id="planka100note">Сервер RU</div>
+        </div>
+        <img src="assets/mastery4_big.png" alt="Планка 100%" />
+      </div>
+    </section>
+
+    <section class="card chart-card">
+      <div class="section-head">
+        <div class="section-title"><span>Динамика процента отметки</span></div>
+        <div class="filter-tabs" role="tablist">
+          <button class="tab-btn" data-range="3" type="button">Недавние</button>
+          <button class="tab-btn active" data-range="all" type="button">Весь период</button>
+        </div>
+      </div>
+
+      <div class="chart-summary-strip">
+        <div class="mini-stat">
+          <div class="mini-stat-lbl">Текущий % отметки</div>
+          <div class="mini-stat-val" id="statCurrMoe" style="color:#fff;">—</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-lbl">Результат за день</div>
+          <div class="mini-stat-val" id="statDayDelta">—</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-lbl">Результат за период</div>
+          <div class="mini-stat-val" id="statRangeDelta">—</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-lbl">Пик за период</div>
+          <div class="mini-stat-val" id="statPeakMoe" style="color:var(--gold-bright);">—</div>
+        </div>
+      </div>
+
+      <div class="chart-container" id="chartWrap">
+        <svg id="moeChartSvg" preserveAspectRatio="none"></svg>
+        <div class="chart-tooltip" id="chartTooltip"></div>
+      </div>
+
+      <div class="chart-legend">
+        <div class="legend-left">
+          <span class="legend-item"><span class="legend-line" style="background: #ffd166;"></span> Процент отметки GOOD_JUK</span>
+          <span class="legend-item"><span class="legend-line" style="background: #10b981;"></span> 65% — 1 отметка</span>
+          <span class="legend-item"><span class="legend-line" style="background: #c084fc;"></span> 85% — 2 отметки</span>
+          <span class="legend-item"><span class="legend-line" style="background: #f5b841;"></span> 95% — 3 отметки</span>
+        </div>
+        <div id="lastParsedTime" style="color: var(--text-muted); font-size: 11.5px;"></div>
+      </div>
+    </section>
+
+    <section class="two-col-grid">
+      <div class="card">
+        <div class="section-head" style="margin-bottom: 12px;">
+          <div class="section-title" style="font-size: 18px;">История сессий</div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span class="forecast-pill na" id="forecastPill">Шанс закрыть цель — появится после первых боёв</span>
+            <span style="font-size: 11.5px; color: var(--text-muted);" id="sessionsCount"></span>
+          </div>
+        </div>
+
+        <div class="sessions-table-wrap">
+          <table class="sessions-table">
+            <thead>
+              <tr>
+                <th>Дата</th>
+                <th>Отметка</th>
+                <th>Изм.</th>
+                <th>Боёв</th>
+                <th>Ср. сумма</th>
+              </tr>
+            </thead>
+            <tbody id="sessionsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-head" style="margin-bottom: 12px;">
+          <div class="section-title" style="font-size: 18px;">Боевая статистика на танке</div>
+          <span style="font-size: 12px; color: var(--text-muted);">случайные бои</span>
+        </div>
+
+        <div class="stats-kpi-grid">
+          <div class="kpi-tile"><div class="kpi-tile-val" id="stWinrate" style="color:#34d399;">—</div><div class="kpi-tile-lbl">Победы (общий)</div></div>
+          <div class="kpi-tile"><div class="kpi-tile-val" id="stAvgDmg" style="color:#c084fc;">—</div><div class="kpi-tile-lbl">Средний урон</div></div>
+          <div class="kpi-tile"><div class="kpi-tile-val" id="stBattles">—</div><div class="kpi-tile-lbl">Боёв на танке</div></div>
+          <div class="kpi-tile"><div class="kpi-tile-val" id="stHitsPct" style="color:var(--emerald);">—</div><div class="kpi-tile-lbl">Попадания</div></div>
+          <div class="kpi-tile"><div class="kpi-tile-val" id="stKd" style="color:var(--cyan);">—</div><div class="kpi-tile-lbl">Коэфф. K/D</div></div>
+          <div class="kpi-tile"><div class="kpi-tile-val" id="stAvgXp" style="color:var(--gold-bright);">—</div><div class="kpi-tile-lbl">Средний опыт</div></div>
+        </div>
+
+        <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); margin-bottom: 8px;">
+          Награды GOOD_JUK на AMX CDC Rafale Mortelle
+        </div>
+        <div class="medals-row">
+          <div class="medal-chip"><img src="assets/medal_warrior.png" alt="" /><div><div>«Воин»</div><div class="medal-count" id="mWarrior">—</div></div></div>
+          <div class="medal-chip"><img src="assets/medal_mainGun.png" alt="" /><div><div>«Осн. калибр»</div><div class="medal-count" id="mMainGun">—</div></div></div>
+          <div class="medal-chip"><img src="assets/medal_supporter.png" alt="" /><div><div>«Поддержка»</div><div class="medal-count" id="mSupporter">—</div></div></div>
+          <div class="medal-chip"><img src="assets/medal_fighter.png" alt="" /><div><div>«Боец»</div><div class="medal-count" id="mFighter">—</div></div></div>
+          <div class="medal-chip"><img src="assets/medal_sniper2.png" alt="" /><div><div>«Снайпер»</div><div class="medal-count" id="mSniper">—</div></div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <div>Процент отметки киберспортсмена · <strong>GOOD_JUK [MILE_]</strong> · AMX CDC Rafale Mortelle</div>
+      <div id="syncFooter" style="color: var(--text-muted);"></div>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+'use strict';
+
+/* ================================================================
+   КОНФИГУРАЦИЯ
+   ================================================================ */
+const CONFIG = {
+  playerName: 'GOOD_JUK',
+  accountId: 32268630,
+  tankId: 7938881,
+  vehicleTag: 'france:F68_AMX_Chasseur_de_char_46_02',
+  region: 'RU',
+  appId: '4b866bda8bcea1cc1671ac8d9862440e',
+  targetDate: new Date('2027-01-13T00:00:00+03:00'),
+  emaK: 2 / 101,                 // EMA клиента игры (последние 100 боёв)
+  storageKey: 'moe_cdc_v1'
+};
+
+/* СТАРТОВАЯ ТОЧКА — фиксируется один раз по данным из клиента игры.
+   moe     — точный процент отметки (напр. 71.35)
+   battles — число боёв на танке в момент фиксации
+   at      — дата фиксации 'YYYY-MM-DD'                                        */
+const BASELINE = { moe: null, battles: null, at: null };
+
+/* ================================================================
+   СОСТОЯНИЕ (localStorage). Правило: нет новых боёв — нет пересчёта.
+   ================================================================ */
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || null; }
+  catch (e) { return null; }
+}
+function saveState(s) { try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(s)); } catch (e) {} }
+
+let state = loadState();
+if (BASELINE.moe != null && (!state || state.baselineBattles !== BASELINE.battles || state.baselineMoe !== BASELINE.moe)) {
+  state = {
+    baselineMoe: BASELINE.moe,
+    baselineBattles: BASELINE.battles,
+    ema: BASELINE.moe / 100 * 4671,
+    lastBattles: BASELINE.battles,
+    lastTs: null,
+    firstTs: null,
+    lastBattleTs: null,
+    battleSums: [],
+    history: []
+  };
+  saveState(state);
+}
+
+/* ================================================================
+   УТИЛИТЫ
+   ================================================================ */
+const $ = id => document.getElementById(id);
+const fmt = n => (n == null || isNaN(n)) ? '—' : Math.round(n).toLocaleString('ru-RU');
+const esc = s => String(s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+const POS = '#34d399', NEG = '#fb7185', GOLD = '#ffd166';
+
+function mskDayKey(dateLike) { return new Date(dateLike).toLocaleDateString('en-CA', { timeZone: 'Europe/Moscow' }); }
+function mskDateLabel(dateLike) { return new Date(dateLike).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', timeZone: 'Europe/Moscow' }); }
+function mskTimeNow() { return new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Moscow' }); }
+
+async function fetchJson(url, timeoutMs = 14000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const r = await fetch(url, { signal: ctrl.signal });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return await r.json();
+  } finally { clearTimeout(t); }
+}
+
+function chQuery(sql) {
+  return fetchJson('https://db.mtstat.info/?user=public&default_format=JSON&query=' + encodeURIComponent(sql))
+    .then(j => j.data || []);
+}
+
+function decl(n, one, few, many) {
+  const a = n % 10, b = n % 100;
+  if (a === 1 && b !== 11) return one;
+  if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return few;
+  return many;
+}
+
+/* ================================================================
+   ПРОГНОЗ: вероятность закрыть ЦЕЛЬ ЧЕЛЛЕНДЖА (2 отметки, 85%)
+   к дедлайну 13.01.2027.
+   Модель: EMA после n боёв = q^n·ema0 + μ·(1−q^n), σ² аналогично,
+   P(EMA ≥ планка85) по нормальному приближению.
+   ================================================================ */
+function normCdf(x) {
+  const t = 1 / (1 + 0.2316419 * Math.abs(x));
+  const d = 0.3989422804014327 * Math.exp(-x * x / 2);
+  const p = d * t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+  return x > 0 ? 1 - p : p;
+}
+
+function renderForecast(p85) {
+  const el = $('forecastPill');
+  if (!el) return;
+  if (state && state.lastMoe != null && state.lastMoe >= 85) {
+    el.className = 'forecast-pill ok';
+    el.textContent = '2 отметки взяты — цель закрыта';
+    el.title = '';
+    return;
+  }
+  const sums = (state && state.battleSums) || [];
+  if (!state || state.ema == null || p85 == null || sums.length < 12 || !state.firstTs) {
+    el.className = 'forecast-pill na';
+    el.textContent = 'Шанс закрыть цель — появится после первых боёв';
+    el.title = '';
+    return;
+  }
+  const t0 = new Date(String(state.firstTs).replace(' ', 'T') + 'Z').getTime();
+  const t1 = state.lastBattleTs ? new Date(String(state.lastBattleTs).replace(' ', 'T') + 'Z').getTime() : t0;
+  const daysSpan = Math.max(1, (t1 - t0) / 86400000 + 1);
+  const pace = sums.length / daysSpan;                                  // боёв в день
+  const daysLeft = Math.max(0, (CONFIG.targetDate - new Date()) / 86400000);
+  const n = Math.max(1, Math.round(pace * daysLeft));                   // боёв до дедлайна
+  const mu = sums.reduce((a, b) => a + b, 0) / sums.length;
+  const sd = Math.sqrt(sums.reduce((a, b) => a + (b - mu) * (b - mu), 0) / Math.max(1, sums.length - 1)) || 1;
+  const q = 1 - CONFIG.emaK;
+  const expEma = Math.pow(q, n) * state.ema + mu * (1 - Math.pow(q, n));
+  const sdEma = Math.sqrt(CONFIG.emaK * CONFIG.emaK * sd * sd * (1 - Math.pow(q, 2 * n)) / (1 - q * q));
+  const prob = Math.max(0, Math.min(100, 100 * (1 - normCdf((p85 - expEma) / sdEma))));
+  const probTxt = prob < 1 ? '<1%' : (prob > 99.5 ? '>99%' : Math.round(prob) + '%');
+  el.className = 'forecast-pill' + (prob >= 50 ? ' ok' : '');
+  el.textContent = 'Шанс закрыть цель к 13.01.2027: ' + probTxt;
+  el.title = 'Цель: 2 отметки (85%). Оценка по ' + sums.length + ' ' + decl(sums.length, 'бою', 'боям', 'боёв') +
+    ' с модом WotStat · темп ' + pace.toFixed(1) + ' боя/день · средняя сумма ' + Math.round(mu) + ' ± ' + Math.round(sd);
+}
+
+let toastTimer = null;
+function toast(msg) {
+  const el = $('toast');
+  el.textContent = msg;
+  el.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:rgba(13,17,28,.96);border:1px solid rgba(245,184,65,.45);color:#f3f6fc;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:600;z-index:9999;opacity:1;transition:opacity .3s;';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.style.opacity = '0'; }, 2600);
+}
+
+/* ================================================================
+   ОБРАТНЫЙ ОТСЧЁТ
+   ================================================================ */
+function tickCountdown() {
+  const d = Math.max(0, CONFIG.targetDate - new Date());
+  $('cdDays').textContent = Math.floor(d / 86400000);
+  $('cdHours').textContent = String(Math.floor(d / 3600000) % 24).padStart(2, '0');
+  $('cdMinutes').textContent = String(Math.floor(d / 60000) % 60).padStart(2, '0');
+  $('cdSeconds').textContent = String(Math.floor(d / 1000) % 60).padStart(2, '0');
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+/* ================================================================
+   РЕНДЕР: ОТМЕТКА
+   ================================================================ */
+const GAUGE_C = 2 * Math.PI * 63;
+
+function setMark(cardId, statusId, reached, textIfNo) {
+  const st = $(statusId);
+  if (reached == null) { st.textContent = '—'; st.style.color = 'var(--text-muted)'; return; }
+  if (reached) { st.textContent = 'Взята'; st.style.color = 'var(--emerald)'; }
+  else { st.textContent = textIfNo; st.style.color = 'var(--text-secondary)'; }
+  $(cardId).style.opacity = '1';
+}
+
+function renderMoe(cur) {
+  // cur: {moe, ema, p65, p85, p95, p100} или null
+  const arc = $('moeGaugeCircle');
+  arc.setAttribute('stroke-dasharray', GAUGE_C.toFixed(1));
+  if (!cur || cur.moe == null) {
+    $('currentMoeDisplay').textContent = '—';
+    arc.style.strokeDashoffset = GAUGE_C;
+    $('currentEmaVal').textContent = '—';
+    ['1', '2', '3'].forEach(i => { $('prog' + i + 'Bar').style.width = '0%'; $('prog' + i + 'Text').textContent = '—'; });
+    setMark('markCard1', 'markStatus1', null); setMark('markCard2', 'markStatus2', null); setMark('markCard3', 'markStatus3', null);
+    return;
+  }
+  $('currentMoeDisplay').textContent = cur.moe.toFixed(2) + '%';
+  arc.style.strokeDashoffset = GAUGE_C * (1 - Math.min(100, cur.moe) / 100);
+  arc.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(0.22,1,0.36,1)';
+  $('currentEmaVal').textContent = fmt(cur.ema) + ' ед.';
+
+  const rows = [
+    { i: '1', need: cur.p65, name: '65%' },
+    { i: '2', need: cur.p85, name: '85%' },
+    { i: '3', need: cur.p95, name: '95%' }
+  ];
+  rows.forEach(r => {
+    const ratio = r.need > 0 ? Math.min(1, cur.ema / r.need) : 0;
+    $('prog' + r.i + 'Bar').style.width = (ratio * 100).toFixed(1) + '%';
+    $('prog' + r.i + 'Text').textContent = cur.ema >= r.need
+      ? 'Взято'
+      : 'ещё ' + fmt(r.need - cur.ema) + ' ед.';
+  });
+
+  setMark('markCard1', 'markStatus1', cur.moe >= 65, 'Не взята — планка ' + fmt(cur.p65));
+  setMark('markCard2', 'markStatus2', cur.moe >= 85, 'Не взята — планка ' + fmt(cur.p85));
+  setMark('markCard3', 'markStatus3', cur.moe >= 95, 'Не взята — планка ' + fmt(cur.p95));
+}
+
+/* ================================================================
+   РЕНДЕР: ДЕНЬ / ПЕРИОД + МИНИ-СТАТЫ
+   ================================================================ */
+function renderDeltas(history, moeNow) {
+  const todayKey = mskDayKey(new Date());
+  const today = history.find(h => h.date === todayKey);
+
+  if (today) {
+    $('dayDeltaVal').textContent = (today.delta >= 0 ? '+' : '') + today.delta.toFixed(2) + '%';
+    $('dayDeltaVal').style.color = today.delta >= 0 ? POS : NEG;
+    $('dayDeltaSub').textContent = mskDateLabel(today.date) + ': ' + today.battles + ' ' + decl(today.battles, 'бой', 'боя', 'боёв') +
+      ' · ср. сумма ' + fmt(today.avgSum);
+    $('statDayDelta').textContent = $('dayDeltaVal').textContent;
+    $('statDayDelta').style.color = today.delta >= 0 ? POS : NEG;
+  } else {
+    $('dayDeltaVal').textContent = '—';
+    $('dayDeltaVal').style.color = '';
+    $('dayDeltaSub').textContent = 'Сегодня боёв не было';
+    $('statDayDelta').textContent = '—';
+  }
+
+  if (history.length && BASELINE.moe != null && moeNow != null) {
+    const battles = history.reduce((s, h) => s + h.battles, 0);
+    const delta = moeNow - BASELINE.moe;
+    $('periodDeltaVal').textContent = (delta >= 0 ? '+' : '') + delta.toFixed(2) + '%';
+    $('periodDeltaVal').style.color = delta >= 0 ? POS : NEG;
+    $('periodDeltaSub').textContent = 'Со старта: ' + BASELINE.moe.toFixed(2) + '% → ' + moeNow.toFixed(2) + '% · ' +
+      battles + ' ' + decl(battles, 'бой', 'боя', 'боёв');
+    $('statRangeDelta').textContent = $('periodDeltaVal').textContent;
+    $('statRangeDelta').style.color = delta >= 0 ? POS : NEG;
+    $('statCurrMoe').textContent = moeNow.toFixed(2) + '%';
+    const peak = Math.max.apply(null, [BASELINE.moe].concat(history.map(h => h.moeEnd)));
+    $('statPeakMoe').textContent = peak.toFixed(2) + '%';
+  } else {
+    $('periodDeltaVal').textContent = '—';
+    $('periodDeltaSub').textContent = 'Период начнётся после фиксации стартовой точки';
+    $('statRangeDelta').textContent = '—';
+    $('statCurrMoe').textContent = '—';
+    $('statPeakMoe').textContent = '—';
+  }
+}
+
+/* ================================================================
+   РЕНДЕР: ГРАФИК
+   ================================================================ */
+let chartRange = 'all';
+let chartPoints = [];
+
+function sessionPoints(history) {
+  const pts = [];
+  if (BASELINE.moe != null && BASELINE.at) pts.push({ label: 'Старт', moe: BASELINE.moe, battles: 0 });
+  history.forEach(h => pts.push({ label: mskDateLabel(h.date), moe: h.moeEnd, battles: h.battles, avgSum: h.avgSum, delta: h.delta }));
+  return pts;
+}
+
+function drawChart(history) {
+  const wrap = $('chartWrap');
+  const svg = $('moeChartSvg');
+  if (!history.length) {
+    wrap.innerHTML = '<div class="chart-empty">График появится автоматически: как только будет зафиксирована стартовая точка ' +
+      'и GOOD_JUK сыграет первые бои, здесь начнёт строиться история процента отметки.</div>';
+    return;
+  }
+  if (!svg.isConnected) {
+    wrap.innerHTML = '<svg id="moeChartSvg" preserveAspectRatio="xMidYMid meet"></svg><div class="chart-tooltip" id="chartTooltip"></div>';
+  }
+  const s = $('moeChartSvg');
+
+  let pts = sessionPoints(history);
+  chartPoints = pts;
+  if (chartRange === '3' && pts.length > 3) pts = pts.slice(-3);
+
+  const W = 1000, H = 300, padL = 44, padR = 16, padT = 18, padB = 32;
+  const ys = pts.map(p => p.moe);
+  let min = Math.min.apply(null, ys.concat([55])), max = Math.max.apply(null, ys.concat([97]));
+  min = Math.max(0, Math.floor(min - 2.5));
+  max = Math.ceil(max + 2.5);
+  const X = i => padL + (pts.length === 1 ? 0.5 : i / (pts.length - 1)) * (W - padL - padR);
+  const Y = v => padT + (1 - (v - min) / (max - min)) * (H - padT - padB);
+
+  let h = '';
+  h += '<defs><linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0%" stop-color="#f5b841" stop-opacity="0.28"/><stop offset="100%" stop-color="#f5b841" stop-opacity="0"/></linearGradient></defs>';
+
+  [[65, '#10b981'], [85, '#c084fc'], [95, '#f5b841']].forEach(pair => {
+    const mp = pair[0], col = pair[1];
+    if (mp < min || mp > max) return;
+    const y = Y(mp);
+    h += '<line x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '" stroke="' + col + '" stroke-opacity="0.45" stroke-dasharray="6 7" stroke-width="1.3"/>';
+    h += '<text x="' + (W - padR) + '" y="' + (y - 5) + '" fill="' + col + '" font-size="12" text-anchor="end" font-weight="700">' + mp + '%</text>';
+  });
+
+  for (let g = Math.ceil(min / 10) * 10; g <= max; g += 10) {
+    const y = Y(g);
+    h += '<line x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '" stroke="rgba(255,255,255,0.05)"/>' +
+      '<text x="' + (padL - 8) + '" y="' + (y + 4) + '" fill="#64748b" font-size="11" text-anchor="end">' + g + '</text>';
+  }
+
+  const line = pts.map((p, i) => X(i).toFixed(1) + ',' + Y(p.moe).toFixed(1)).join(' ');
+  if (pts.length > 1) {
+    h += '<polygon points="' + padL + ',' + (H - padB) + ' ' + line + ' ' + X(pts.length - 1).toFixed(1) + ',' + (H - padB) + '" fill="url(#areaG)"/>';
+    h += '<polyline points="' + line + '" fill="none" stroke="#ffd166" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>';
+  }
+  pts.forEach((p, i) => {
+    h += '<circle cx="' + X(i) + '" cy="' + Y(p.moe) + '" r="10" fill="transparent" data-i="' + i + '"/>' +
+      '<circle cx="' + X(i) + '" cy="' + Y(p.moe) + '" r="4.2" fill="#0d1120" stroke="#ffd166" stroke-width="2.4" pointer-events="none"/>' +
+      '<text x="' + X(i) + '" y="' + (H - padB + 20) + '" fill="#8a94a5" font-size="11" text-anchor="middle" pointer-events="none">' + esc(p.label) + '</text>';
+  });
+
+  s.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+  s.innerHTML = h;
+
+  s.onmousemove = ev => {
+    const rect = s.getBoundingClientRect();
+    const fx = (ev.clientX - rect.left) / rect.width * W;
+    let best = 0, bd = 1e9;
+    pts.forEach((p, i) => { const d = Math.abs(X(i) - fx); if (d < bd) { bd = d; best = i; } });
+    const p = pts[best];
+    const tp = $('chartTooltip');
+    if (!tp) return;
+    tp.innerHTML = '<strong>' + esc(p.label) + '</strong> · ' + p.moe.toFixed(2) + '%' +
+      (p.battles ? '<br>' + p.battles + ' ' + decl(p.battles, 'бой', 'боя', 'боёв') + ' · ср. сумма ' + fmt(p.avgSum) +
+        ' · ' + (p.delta >= 0 ? '+' : '') + p.delta.toFixed(2) + '%' : '');
+    tp.style.display = 'block';
+    tp.style.left = Math.min(rect.width - 170, Math.max(8, (X(best) / W) * rect.width + 12)) + 'px';
+    tp.style.top = Math.max(6, (Y(p.moe) / H) * rect.height - 12) + 'px';
+  };
+  s.onmouseleave = () => { const tp = $('chartTooltip'); if (tp) tp.style.display = 'none'; };
+}
+
+document.querySelectorAll('.tab-btn[data-range]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn[data-range]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    chartRange = btn.dataset.range;
+    drawChart(state && state.history ? state.history : []);
+  });
+});
+
+/* ================================================================
+   РЕНДЕР: СЕССИИ
+   ================================================================ */
+function renderSessions(history) {
+  const tb = $('sessionsTableBody');
+  if (!history.length) {
+    tb.innerHTML = '<tr><td colspan="5" class="sess-empty">Пока записей нет. Сессии появятся сами — только в те дни, когда GOOD_JUK играет на этом танке.</td></tr>';
+    $('sessionsCount').textContent = '';
+    return;
+  }
+  $('sessionsCount').textContent = history.length + ' ' + decl(history.length, 'сессия', 'сессии', 'сессий');
+  tb.innerHTML = history.slice().reverse().map(h =>
+    '<tr title="Ср. урон: ' + fmt(h.avgDmg) + ' · победы: ' + h.wins + '/' + h.battles + '">' +
+    '<td>' + esc(mskDateLabel(h.date)) + '</td>' +
+    '<td style="font-weight:700;color:var(--gold-bright);">' + h.moeEnd.toFixed(2) + '%</td>' +
+    '<td style="font-weight:700;color:' + (h.delta >= 0 ? POS : NEG) + ';">' + (h.delta >= 0 ? '+' : '') + h.delta.toFixed(2) + '%</td>' +
+    '<td>' + h.battles + '</td>' +
+    '<td>' + fmt(h.avgSum) + '</td>' +
+    '</tr>'
+  ).join('');
+}
+
+/* ================================================================
+   ДАННЫЕ
+   ================================================================ */
+async function loadTankStats() {
+  const url = 'https://api.tanki.su/wot/tanks/stats/?application_id=' + CONFIG.appId +
+    '&account_id=' + CONFIG.accountId + '&tank_id=' + CONFIG.tankId + '&extra=random' +
+    '&fields=random.battles%2Crandom.wins%2Crandom.damage_dealt%2Crandom.frags%2Crandom.battle_avg_xp%2Crandom.hits_percents%2Crandom.survived_battles';
+  const j = await fetchJson(url);
+  const v = (j.data && j.data[CONFIG.accountId] || [])[0];
+  if (!v || !v.random) return null;
+  const r = v.random;
+  const deaths = Math.max(1, (r.battles || 0) - (r.survived_battles || 0));
+  return {
+    battles: r.battles || 0,
+    wins: r.wins || 0,
+    winrate: r.battles ? r.wins / r.battles * 100 : 0,
+    avgDmg: r.battles ? r.damage_dealt / r.battles : 0,
+    hits: r.hits_percents,
+    kd: r.frags != null ? r.frags / deaths : null,
+    avgXp: r.battle_avg_xp
+  };
+}
+
+async function loadMedals() {
+  const url = 'https://api.tanki.su/wot/tanks/achievements/?application_id=' + CONFIG.appId +
+    '&account_id=' + CONFIG.accountId + '&tank_id=' + CONFIG.tankId;
+  const j = await fetchJson(url);
+  const v = (j.data && j.data[CONFIG.accountId] || [])[0];
+  return (v && v.achievements) || {};
+}
+
+async function loadThresholds() {
+  const rows = await chQuery(
+    "SELECT p65, p85, p95, p100, battleCount, latestDateTime FROM GameMoeInfoLatest " +
+    "WHERE region = '" + CONFIG.region + "' AND vehicleTag = '" + CONFIG.vehicleTag + "'");
+  if (!rows.length) return null;
+  const r = rows[0];
+  $('planka65').textContent = fmt(r.p65);
+  $('planka85').textContent = fmt(r.p85);
+  $('planka95').textContent = fmt(r.p95);
+  $('planka100').textContent = fmt(r.p100);
+  const dt = new Date(String(r.latestDateTime).replace(' ', 'T') + 'Z');
+  $('planka100note').textContent = isNaN(dt) ? 'Сервер RU'
+    : 'выборка ' + fmt(r.battleCount) + ' боёв · ' + dt.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', timeZone: 'Europe/Moscow' });
+  return { p65: +r.p65, p85: +r.p85, p95: +r.p95, p100: +r.p100 };
+}
+
+async function loadNewBattles(sinceTs) {
+  let where = "region = '" + CONFIG.region + "' AND playerName = '" + CONFIG.playerName + "' " +
+    "AND tankTag = '" + CONFIG.vehicleTag + "' AND battleMode = 'REGULAR'";
+  if (sinceTs) where += " AND dateTime > toDateTime64('" + sinceTs + "', 3)";
+  return chQuery(
+    "SELECT toString(dateTime) AS ts, gunMarkSum AS markSum, result, " +
+    "personal.damageDealt AS dmg FROM Event_OnBattleResult WHERE " + where + " ORDER BY dateTime LIMIT 400");
+}
+
+/* ================================================================
+   ОСНОВНОЙ ЦИКЛ
+   ================================================================ */
+function snapshotOf(thresholds, ema) {
+  const e = ema != null ? ema : (state ? state.ema : null);
+  if (e == null || !thresholds) return null;
+  return { moe: e / thresholds.p100 * 100, ema: e, p65: thresholds.p65, p85: thresholds.p85, p95: thresholds.p95, p100: thresholds.p100 };
+}
+
+function setSyncLine(text) {
+  $('syncFooter').textContent = text;
+  $('lastParsedTime').textContent = text;
+}
+
+async function main(manual) {
+  const btn = $('refreshApiBtn');
+  if (manual) { btn.disabled = true; btn.textContent = 'Проверяем…'; }
+
+  let tank = null, thresholds = null, medals = null, apiErr = false;
+  try { tank = await loadTankStats(); } catch (e) { apiErr = true; }
+  try { thresholds = await loadThresholds(); } catch (e) { apiErr = true; }
+  try { medals = await loadMedals(); } catch (e) {}
+
+  if (tank) {
+    $('heroTankBattles').textContent = fmt(tank.battles);
+    $('stBattles').textContent = fmt(tank.battles);
+    $('stWinrate').textContent = tank.winrate.toFixed(2) + '%';
+    $('stAvgDmg').textContent = fmt(tank.avgDmg);
+    $('stHitsPct').textContent = tank.hits + '%';
+    $('stKd').textContent = tank.kd != null ? tank.kd.toFixed(2) : '—';
+    $('stAvgXp').textContent = fmt(tank.avgXp);
+  }
+  if (medals) {
+    const m = { mWarrior: medals.warrior, mMainGun: medals.mainGun, mSupporter: medals.supporter, mFighter: medals.fighter, mSniper: medals.sniper2 };
+    Object.keys(m).forEach(id => {
+      const el = $(id);
+      if (el) { el.textContent = m[id] > 0 ? '×' + m[id] : '×0'; el.parentElement.parentElement.style.opacity = m[id] > 0 ? '1' : '0.45'; }
+    });
+  }
+
+  if (BASELINE.moe == null) {
+    renderMoe(null); renderDeltas([], null); drawChart([]); renderSessions([]); renderForecast(null);
+    setSyncLine(apiErr ? 'Источники временно недоступны' : 'Ожидание стартовой точки · ' + mskTimeNow() + ' МСК');
+    if (manual) { btn.disabled = false; btn.textContent = 'Проверить новые бои'; }
+    return;
+  }
+
+  const history = state.history || [];
+  const battlesNow = tank ? tank.battles : state.lastBattles;
+
+  // Нет новых боёв — строго показываем зафиксированное состояние
+  if (!tank || battlesNow <= state.lastBattles) {
+    const snap = snapshotOf(thresholds);
+    if (snap) { renderMoe(snap); renderDeltas(history, snap.moe); }
+    else if (state.history.length === 0 && state.ema != null && state.p100Cache) {
+      const s2 = { moe: state.ema / state.p100Cache * 100, ema: state.ema, p65: 2622, p85: 3505, p95: 4159, p100: state.p100Cache };
+      renderMoe(s2); renderDeltas(history, s2.moe);
+    } else {
+      renderMoe(state.ema != null ? { moe: state.lastMoe != null ? state.lastMoe : null, ema: state.ema, p65: 2622, p85: 3505, p95: 4159, p100: 4671 } : null);
+      renderDeltas(history, state.lastMoe != null ? state.lastMoe : null);
+    }
+    drawChart(history);
+    renderSessions(history);
+    renderForecast(thresholds ? thresholds.p85 : (state.p85Cache || null));
+    setSyncLine(apiErr ? 'Источники временно недоступны — показаны последние данные'
+      : 'Новых боёв нет · проверено ' + mskTimeNow() + ' МСК');
+    if (manual) { btn.disabled = false; btn.textContent = 'Проверить новые бои'; toast('Новых боёв нет'); }
+    return;
+  }
+
+  // Есть новые бои — забираем из WotStat и пересчитываем
+  let rows = [];
+  try { rows = await loadNewBattles(state.lastTs); } catch (e) { apiErr = true; }
+
+  if (!rows.length) {
+    const snap = snapshotOf(thresholds);
+    renderMoe(snap); renderDeltas(history, snap && snap.moe); drawChart(history); renderSessions(history);
+    renderForecast(thresholds ? thresholds.p85 : (state.p85Cache || null));
+    setSyncLine('Играет без WotStat или данные ещё не дошли · проверено ' + mskTimeNow() + ' МСК');
+    if (manual) { btn.disabled = false; btn.textContent = 'Проверить новые бои'; }
+    return;
+  }
+
+  const p100 = thresholds ? thresholds.p100 : 4671;
+  const byDay = {};
+  state.battleSums = (state.battleSums || []).concat(rows.map(r => +r.markSum)).slice(-400);
+  if (!state.firstTs) state.firstTs = String(rows[0].ts);
+  state.lastBattleTs = String(rows[rows.length - 1].ts);
+  let emaProbe = state.ema, prevKey = null;
+  for (const b of rows) {
+    const key = mskDayKey(String(b.ts).replace(' ', 'T') + 'Z');
+    if (!byDay[key]) byDay[key] = { battles: 0, sumTotal: 0, dmgTotal: 0, wins: 0, startEma: emaProbe, endEma: emaProbe };
+    if (key !== prevKey) { byDay[key].startEma = emaProbe; prevKey = key; }
+    const val = +b.markSum;
+    emaProbe = emaProbe + CONFIG.emaK * (val - emaProbe);
+    const d = byDay[key];
+    d.battles++; d.sumTotal += val; d.dmgTotal += (+b.dmg || 0);
+    if (b.result === 'win') d.wins++;
+    d.endEma = emaProbe;
+  }
+  const ema = emaProbe;
+
+  const merged = {};
+  history.forEach(h => merged[h.date] = h);
+  Object.keys(byDay).forEach(key => {
+    const d = byDay[key];
+    const prev = merged[key];
+    const moeEnd = d.endEma / p100 * 100;
+    if (prev && prev.battles) {
+      const total = prev.battles + d.battles;
+      merged[key] = {
+        date: key, battles: total,
+        avgSum: (prev.avgSum * prev.battles + d.sumTotal) / total,
+        avgDmg: (prev.avgDmg * prev.battles + d.dmgTotal) / total,
+        wins: prev.wins + d.wins,
+        moeStart: prev.moeStart, moeEnd: moeEnd,
+        delta: moeEnd - prev.moeStart
+      };
+    } else {
+      const moeStart = d.startEma / p100 * 100;
+      merged[key] = {
+        date: key, battles: d.battles,
+        avgSum: d.sumTotal / d.battles, avgDmg: d.dmgTotal / d.battles,
+        wins: d.wins, moeStart: moeStart, moeEnd: moeEnd, delta: moeEnd - moeStart
+      };
+    }
+  });
+  const newHistory = Object.values(merged).sort((a, b) => a.date < b.date ? -1 : 1);
+
+  state.ema = ema;
+  state.lastBattles = battlesNow;
+  state.lastTs = String(rows[rows.length - 1].ts);
+  state.lastMoe = ema / p100 * 100;
+  state.history = newHistory;
+  if (thresholds) { state.p100Cache = thresholds.p100; state.p85Cache = thresholds.p85; }
+  saveState(state);
+
+  const snap = { moe: state.lastMoe, ema, p65: thresholds ? thresholds.p65 : 2622, p85: thresholds ? thresholds.p85 : 3505, p95: thresholds ? thresholds.p95 : 4159, p100: p100 };
+  renderMoe(snap);
+  renderDeltas(newHistory, snap.moe);
+  drawChart(newHistory);
+  renderSessions(newHistory);
+  renderForecast(thresholds ? thresholds.p85 : 3505);
+  setSyncLine('Обновлено: +' + rows.length + ' ' + decl(rows.length, 'бой', 'боя', 'боёв') + ' · ' + mskTimeNow() + ' МСК');
+  toast('Процент обновлён: ' + snap.moe.toFixed(2) + '%');
+
+  if (manual) { btn.disabled = false; btn.textContent = 'Проверить новые бои'; }
+}
+
+$('refreshApiBtn').addEventListener('click', () => { main(true).catch(() => {}); });
+main().catch(() => {});
+setInterval(() => { main().catch(() => {}); }, 5 * 60 * 1000);
+
+  </script>
+</body>
+</html>
